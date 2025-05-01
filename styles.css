@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 2rem;
+    background-color: #000000;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.meme-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.meme-card {
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.meme-card:hover {
+    transform: translateY(-5px);
+}
+
+.meme-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.meme-card p {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.loader {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #ffffff;
+    display: none;
+}
+
+.load-more {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.8rem 2rem;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.load-more:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.load-more:active {
+    transform: scale(0.95);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #000000;
+    margin-top: 2rem;
+    border-top: 1px solid #ffffff;
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .meme-container {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .load-more {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+    }
+}
