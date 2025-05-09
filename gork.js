@@ -14,7 +14,7 @@ gork.on(Events.MessageCreate, async message => {
   const ai = new GoogleGenAI({ apiKey: process.env.API });
   
   try {
-    const res = await ai.models.generateContent({model: "gemini-1.5-flash",contents: `you recived a message from a discord user whos name is "${message.author.username}", respone to the message in short with high humor (only send your respone message, nothing else). its that message: ${message.content}`,});
+    const res = await ai.models.generateContent({model: "gemini-1.5-flash",contents: ` your name is Gork. you recived a message from a discord user whos name is "${message.author.username}", respone to the message in short with high humor (only send your respone message, nothing else). its that message: ${message.content}`,});
     message.reply(res.text)
   } catch (err) {console.log('error:' + err.message);};
 });
