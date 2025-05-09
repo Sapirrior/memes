@@ -2,7 +2,7 @@ const { Client, GatewayIntentBits, Events } = require('discord.js');
 const gork = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]});
 const fs = require('node:fs');
 require('dotenv').config();
-const res = [];
+let res = [];
 
 gork.once(Events.ClientReady, g => {
   g.user.setActivity('on X');
