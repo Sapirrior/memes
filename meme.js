@@ -1,5 +1,5 @@
 const { Client, EmbedBuilder, GatewayIntentBits } = require('discord.js');
-const fetch = require('node-fetch');
+const axios = require('axios');
 require('dotenv').config();
 
 const client = new Client({
@@ -15,10 +15,10 @@ client.on('ready', () => console.log(`Logged in as ${client.user.tag}`));
 client.on('messageCreate', async (message) => {
     if (message.mentions.has(client.user) && !message.author.bot) {
         try {
-            const res = await fetch('https://www.reddit.com/r/memes/random.json', {
-                headers: { 'User-agent': 'Discord Meme Bot' }
+            const res = await axios.get('https://www.reddit.com/r/memes/random.json', {
+                headers: { 'User-Agent': 'Discord Meme Bot' }
             });
-            const post = (await res.json())[0].data.children[0].data;
+            const post = res.data[0].data.children[0].data;
 
             if (!post.url.match(/\.(jpeg|jpg|gif|png)$/)) {
                 return message.channel.send('No image meme found!');
