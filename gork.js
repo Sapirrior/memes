@@ -1,22 +1,20 @@
 const { Client, GatewayIntentBits, Events } = require('discord.js');
-const gork = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]});
-const { GoogleGenAI } = require('@google/genai');
-require("dotenv").config();
+const gork = new Client({intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds]});
+const axios = require('axios');
+require('dotenv').config();
 
-gork.once(Events.ClientReady, g => {
-  g.user.setActivity('on X');
-  console.log('im alive :>');
+gork.once(Events.ClientReady, c => {
+  consolr.log('online, sir');
+  gork.user.setActivity('on X');
 });
 
 gork.on(Events.MessageCreate, async message => {
   if(message.author.bot) return;
-  if(Math.floor(Math.random()* 10) > 1) return; // only 10% chance
-  const ai = new GoogleGenAI({ apiKey: process.env.API });
+  if(!message.mentions.has(gork.user)) return;
   
-  try {
-    const res = await ai.models.generateContent({model: "gemini-1.5-flash",contents: `first read this message "${message.content}", only send the respone to this given message in short and a bit humorous way nothing else.`,});
-    message.reply(res.text)
-  } catch (err) {console.log('error:' + err.message);};
+  try{const memes = await axios.get('https://meme-api.com/gimme');const meme = memes.data.url;const title = memes.data.title;}catch(err){console.log(err)};
+  embed = {color: 0x7fbbe7,author: { name: title },image: { url: meme }};
+  message.channel.send({embeds: [embed]}).catch(err => console.log(err));
 });
 
-gork.login(process.env.TOKEN);
+gork.login(process.env.TOKEN)
