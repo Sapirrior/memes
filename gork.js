@@ -4,7 +4,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 gork.once(Events.ClientReady, c => {
-  consolr.log('online, sir');
+  console.log('online, sir');
   gork.user.setActivity('on X');
 });
 
@@ -13,7 +13,7 @@ gork.on(Events.MessageCreate, async message => {
   if(!message.mentions.has(gork.user)) return;
   
   try{const memes = await axios.get('https://meme-api.com/gimme');const meme = memes.data.url;const title = memes.data.title;}catch(err){console.log(err)};
-  embed = {color: 0x7fbbe7,author: { name: title },image: { url: meme }};
+  embed = {color: 0x0000,author: { name: title },image: { url: meme }};
   message.channel.send({embeds: [embed]}).catch(err => console.log(err));
 });
 
