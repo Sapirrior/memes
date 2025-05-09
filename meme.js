@@ -34,7 +34,7 @@ client.on('messageCreate', async (message) => {
 
             message.channel.send({ embeds: [embed] });
         } catch (error) {
-            message.channel.send('Failed to fetch meme!');
+            message.channel.send('Failed to fetch meme!' + error);
         }
     }
 });
