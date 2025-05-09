@@ -1,21 +1,22 @@
 const { Client, GatewayIntentBits, Events } = require('discord.js');
 const gork = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]});
-const fs = require('node:fs');
-require('dotenv').config();
-let res = [];
+const { GoogleGenAI } = require('@google/genai');
+require("dotenv").config();
 
 gork.once(Events.ClientReady, g => {
   g.user.setActivity('on X');
   console.log('im alive :>');
-  try {const data = fs.readFileSync('./gork-s.json', 'utf8');res = JSON.parse(data);}catch(err){console.log(err);};
 });
 
-gork.on(Events.MessageCreate, async msg => {
-  if(msg.author.bot) return;
-  if(Math.floor(Math.random()* 10) > 3) return; // only 30% chance
-  const randomResIndex = Math.floor(Math.random() * res.length);
-  const randomRes = res[randomResIndex];
-  try{msg.channel.send(randomRes)}catch(error){console.log(error)}
+gork.on(Events.MessageCreate, async message => {
+  if(message.author.bot) return;
+  if(Math.floor(Math.random()* 10) > 1) return; // only 10% chance
+  const ai = new GoogleGenAI({ apiKey: process.env.API });
+  
+  try {
+    const res = await ai.models.generateContent({model: "gemini-1.5-flash",contents: `you recived a message from a discord user whos name is "${message.author.username}", respone to the message in short with high humor (only send your respone message, nothing else). its that message: ${message.content}`,});
+    message.reply(res.text)
+  } catch (err) {console.log('error:' + err.message);};
 });
 
-gork.login(process.env.TOKEN); // Login Gork
+gork.login(process.env.TOKEN);
