@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, Events } = require('discord.js');
-const gork = new Client({intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds]});
+const gork = new Client({intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]});
 const axios = require('axios');
 require('dotenv').config();
 
