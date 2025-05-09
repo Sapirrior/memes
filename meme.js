@@ -32,9 +32,10 @@ client.on('messageCreate', async (message) => {
                 .setImage(post.url)
                 .setFooter({ text: 'Find Top Memes From Internet' });
 
-            message.channel.send({ embeds: [embed] });
+            await message.channel.send({ embeds: [embed] });
         } catch (error) {
-            message.channel.send('Failed to fetch meme!' + error);
+            console.error(error);
+            await message.channel.send(`Failed to fetch meme! Error: ${error.message}`);
         }
     }
 });
