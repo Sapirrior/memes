@@ -8,5 +8,4 @@ TOKEN = os.getenv('TOKEN')
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(intents=intents)
-@bot.event async def on_ready(): print('online')
 bot.run(TOKEN)
